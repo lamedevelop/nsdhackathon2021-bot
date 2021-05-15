@@ -21,15 +21,15 @@ dp = Dispatcher(bot)
 async def chooseUniversity(message):
     pass
 
-@dp.message_handler(commands=["new_messages"])
+@dp.message_handler(commands=["income"])
 async def chooseUniversity(message):
     pass
 
-@dp.message_handler(commands=["out_messages"])
+@dp.message_handler(commands=["outcome"])
 async def chooseUniversity(message):
     pass
 
-@dp.message_handler(commands=["auth"])
+@dp.message_handler(commands=["new"])
 async def chooseUniversity(message):
     pass
 
