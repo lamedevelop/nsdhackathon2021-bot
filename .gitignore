@@ -1,0 +1,15 @@
+.DS_Store
+*/.DS_Store
+*/*/.DS_Store
+__pycache__/
+*/__pycache__/
+*.pem
+*Config.py
+*/*Config.py
+.idea/
+Logs/*
+Logs/
+Configs/og*
+Configs/ab*
+venv/
+.env
