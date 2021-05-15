@@ -10,7 +10,6 @@ README.md
 Dockerfile*
 docker-compose*
 
-.env
 *.exe
 .idea/
 *.py[cod]
