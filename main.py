@@ -11,6 +11,7 @@ from controllers.keyboard import Keyboard
 
 logger = Logger()
 
+
 def getToken():
     if 'BOT_TOKEN' in os.environ:
         return os.environ['BOT_TOKEN']
@@ -33,6 +34,7 @@ url = f"http://{getUrl()}/api"
 bot = Bot(token="1787537307:AAFOKVKTGeleb0PoeD6NduT0wVPz1XYTPCM")
 dp = Dispatcher(bot)
 
+
 def isUserExist(message):
     r = requests.get(f"{url}/user/exist?tg_id={message['from']['id']}")
     if r.json()['data']:
@@ -48,7 +50,7 @@ async def sendHello(message, func):
 
 
 async def sendGoobye(message, func):
-    reply = f'Привет!\nПошел нахер!'
+    reply = f'Привет!\nПройдите регистрацию!'
     await message.reply(reply, reply_markup=func)
     logger.botMessage(reply.replace("\n", " "))
 
@@ -65,34 +67,38 @@ async def botStart(message):
 @dp.message_handler(commands=["income"])
 async def botIncome(message):
     logger.userMessage(message)
-    # if isUserExist(message):
-    r = requests.get(f"{url}/income?user_id={message['from']['id']}")
-    logger.userMessage(message)
+    if isUserExist(message):
+        r = requests.get(f"{url}/income?user_id={message['from']['id']}")
+
 
 @dp.message_handler(commands=["outcome"])
 async def botOutcome(message):
     logger.userMessage(message)
-    # if isUserExist(message):
-    r = requests.get(f"{url}/outcome?user_id={message['from']['id']}")
-    logger.userMessage(message)
+    if isUserExist(message):
+        r = requests.get(f"{url}/outcome?user_id={message['from']['id']}")
+
 
 @dp.message_handler(commands=["unread"])
 async def botUnread(message):
     logger.userMessage(message)
-    # if isUserExist(message):
-    r = requests.get(f"{url}/unread?user_id={message['from']['id']}")
-    logger.userMessage(message)
+    if isUserExist(message):
+        r = requests.get(f"{url}/unread?user_id={message['from']['id']}")
+
 
 @dp.message_handler()
 async def botMessageReciever(message):
     logger.userMessage(message)
-    if message['text'] in ['income', 'outcome', 'unread']:
-        r = requests.get(f"{url}/{message['text']}?user_id=2") #{message['from']['id']}")
-        await message.reply(' '.join(str(x) for x in r.json()['data']))
+    if message["text"] in ['income', 'outcome', 'unread']:
+        r = requests.get(f"{url}/{message['text']}?user_id=2")
+        if len(r.json()['data']) != 0:
+            await message.reply(' '.join(str(x) for x in r.json()['data']))
+        else:
+            await message.reply('Сообщений нет')
+
     else:
         botAnswer = f'Привет, {message["from"]["first_name"]}!\nХочешь пообщаться?'
         await message.reply(botAnswer)
-        logger.botMessage(message)
+        logger.botMessage(botAnswer)
 
 
 if __name__ == '__main__':
