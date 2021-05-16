@@ -10,5 +10,5 @@ COPY . /etc/bot/
 
 WORKDIR /etc/bot/
 
-CMD ["python3", "main.py"]
+CMD ["python", "main.py"]
 

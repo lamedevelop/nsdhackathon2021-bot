@@ -31,7 +31,7 @@ def getUrl():
 url = f"http://{getUrl()}/api"
 
 # bot = Bot(token=getToken())
-bot = Bot(token="1787537307:AAFOKVKTGeleb0PoeD6NduT0wVPz1XYTPCM")
+bot = Bot(token=getToken())
 dp = Dispatcher(bot)
 
 
