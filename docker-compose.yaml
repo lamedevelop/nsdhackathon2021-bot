@@ -2,7 +2,14 @@ version: '3.9'
 
 services: 
   bot:
-    container_name: bot
+    container_name: nsdhackathon2021-bot
     build: .
     restart: always
     env_file: .env
+    networks:
+      - nsdhackathon2021
+
+networks:
+  nsdhackathon2021:
+    name: nsdhackathon2021
+    driver: bridge
